@@ -26,13 +26,13 @@ export default function GitHubDropdown({ className }: { className?: string }) {
             <DropdownMenuContent className="w-48">
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        <a href={REPOSITORY_URL} target="_blank">
+                        <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">
                             sodium-labs/playground
                         </a>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem className="tracking-wide">
-                        <a href={SODIUM_LABS_GITHUB_URL} target="_blank">
+                        <a href={SODIUM_LABS_GITHUB_URL} target="_blank" rel="noreferrer">
                             View all projects
                         </a>
                     </DropdownMenuItem>

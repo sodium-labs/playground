@@ -13,14 +13,15 @@ export default [
     ...tseslint.configs.stylistic,
     eslintConfigPrettier,
     {
-        ignores: ["**/dist"],
-        plugins: {
-            "@stylistic": stylistic,
-        },
         rules: {
+            camelcase: "off",
             "no-console": "off",
             "prefer-const": "error",
-            camelcase: "off",
+            "import/no-anonymous-default-export": "off",
+        },
+    },
+    {
+        rules: {
             "@typescript-eslint/no-unsafe-enum-comparison": "off",
             "@typescript-eslint/no-require-imports": "off",
             "@typescript-eslint/no-var-requires": "off",
@@ -29,18 +30,21 @@ export default [
             "@typescript-eslint/restrict-template-expressions": "off",
             "@typescript-eslint/consistent-type-imports": "error",
             "@typescript-eslint/require-await": "off",
-            "import/no-anonymous-default-export": "off",
-            "@stylistic/quotes": [
-                "off",
-                "double",
-                {
-                    allowTemplateLiterals: true,
-                },
-            ],
+        },
+    },
+    {
+        plugins: {
+            "@stylistic": stylistic,
+        },
+        rules: {
             "@stylistic/jsx-indent-props": ["error", 4],
             "@stylistic/brace-style": ["error", "1tbs"],
             "@stylistic/max-statements-per-line": "error",
             "@stylistic/semi": ["error", "always"],
+            "@stylistic/semi-style": ["error", "last"],
+            "@stylistic/no-extra-semi": "error",
+            "@stylistic/no-trailing-spaces": "error",
+            "@stylistic/indent": ["error", 4, { SwitchCase: 1, offsetTernaryExpressions: true }],
             "@stylistic/semi-spacing": [
                 "error",
                 {
@@ -48,10 +52,6 @@ export default [
                     after: true,
                 },
             ],
-            "@stylistic/semi-style": ["error", "last"],
-            "@stylistic/no-extra-semi": "error",
-            "@stylistic/no-trailing-spaces": "error",
-            "@stylistic/indent": ["error", 4, { SwitchCase: 1, offsetTernaryExpressions: true }],
             "@stylistic/space-before-function-paren": [
                 "error",
                 {
@@ -63,18 +63,21 @@ export default [
         },
     },
     {
-        ...pluginReact.configs.flat?.recommended,
+        ...pluginReact.configs.flat.recommended,
+    },
+    {
         languageOptions: {
-            ...pluginReact.configs.flat?.recommended.languageOptions,
             globals: {
                 ...globals.serviceworker,
             },
         },
         plugins: {
+            ...pluginReact.configs.flat.recommended.plugins,
             "@next/next": pluginNext,
             "react-hooks": pluginReactHooks,
         },
         rules: {
+            ...pluginReact.configs.flat.recommended.rules,
             ...pluginReactHooks.configs.recommended.rules,
             ...pluginNext.configs.recommended.rules,
             ...pluginNext.configs["core-web-vitals"].rules,
