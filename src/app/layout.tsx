@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { BASE_URL } from "@/config/links";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -14,9 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    metadataBase: new URL(
-        process.env.NODE_ENV === "production" ? "https://playground.sodiumlabs.xyz" : "http://localhost:3000",
-    ),
+    metadataBase: new URL(BASE_URL),
     title: "Code Playground",
     description: "Quickly test code snippets in your browser, whenever you need.",
     keywords: ["programming", "development", "dev", "code", "playground", "play", "test"],
