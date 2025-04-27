@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { type ExecutionResult, ExecutionState, useExecutionStore } from "@/stores/execution";
 import { useEditorStore } from "@/stores/editor";
-import { transpileTypeScript } from "@/lib/utils";
 
 export default function ExecutionButton() {
     const [value, language] = useEditorStore(useShallow(state => [state.value, state.language]));
@@ -18,22 +17,11 @@ export default function ExecutionButton() {
         setExecutionResult(null);
         setExecutionState(ExecutionState.Running);
 
-        let code;
-        if (language === "typescript") {
-            code = transpileTypeScript("js", value);
-            if (code === null) {
-                toast("Failed to transpile your TypeScript code");
-                return;
-            }
-        } else {
-            code = value;
-        }
-
         try {
             const response = await fetch(
-                `https://plume.ptarmigan.xyz/api/exec?language=${encodeURIComponent(
-                    language === "typescript" ? "javascript" : language,
-                )}&code=${encodeURIComponent(code)}`,
+                `https://plume.sodiumlabs.xyz/api/exec?language=${encodeURIComponent(
+                    language,
+                )}&code=${encodeURIComponent(value)}`,
             );
 
             if (response.status === 429) {
