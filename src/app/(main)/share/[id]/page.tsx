@@ -2,8 +2,9 @@ import { readFile } from "node:fs/promises";
 import Playground from "@/components/playground/Playground";
 import { getSnippetFiles, SNIPPETS_DIRECTORY } from "@/snippets/fs";
 import { snippetSchema } from "@/snippets/schema";
+import { notFound } from "next/navigation";
 
-export default async ({ params }: { params: Promise<{ id: string }> }) => {
+export default async ({ params }: PageProps<"/share/[id]">) => {
     const id = (await params).id;
 
     let files;
@@ -11,12 +12,13 @@ export default async ({ params }: { params: Promise<{ id: string }> }) => {
         files = await getSnippetFiles();
     } catch (err) {
         console.error(err);
-        return new Response(null, { status: 500 });
+        // TODO: show error instead
+        notFound();
     }
 
     const filename = `${id}.json`;
     if (!files.includes(filename)) {
-        return new Response(null, { status: 404 });
+        notFound();
     }
 
     let snippet;
@@ -26,7 +28,8 @@ export default async ({ params }: { params: Promise<{ id: string }> }) => {
         snippet = snippetSchema.parse(json);
     } catch (err) {
         console.error(err);
-        return new Response(null, { status: 500 });
+        // TODO: show error instead
+        notFound();
     }
 
     return <Playground snippet={snippet} />;
