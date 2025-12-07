@@ -1,0 +1,8 @@
+{
+    "$schema": "./node_modules/oxfmt/configuration_schema.json",
+    "printWidth": 120,
+    "arrowParens": "avoid",
+    "tabWidth": 4,
+    "useTabs": false,
+    "ignorePatterns": ["node_modules", ".next", "dist", "package-lock.json"]
+}
