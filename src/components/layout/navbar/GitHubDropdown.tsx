@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ChevronDownIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,15 +27,15 @@ export default function GitHubDropdown({ className }: { className?: string }) {
             <DropdownMenuContent className="w-48">
                 <DropdownMenuGroup>
                     <DropdownMenuItem>
-                        <a href={REPOSITORY_URL} target="_blank" rel="noreferrer">
+                        <Link prefetch={false} href={REPOSITORY_URL} target="_blank" rel="noreferrer">
                             sodium-labs/playground
-                        </a>
+                        </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem className="tracking-wide">
-                        <a href={SODIUM_LABS_GITHUB_URL} target="_blank" rel="noreferrer">
+                        <Link prefetch={false} href={SODIUM_LABS_GITHUB_URL} target="_blank" rel="noreferrer">
                             View all projects
-                        </a>
+                        </Link>
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>

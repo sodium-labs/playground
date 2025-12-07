@@ -1,3 +1,4 @@
+// oxlint-disable no-new-array
 "use client";
 
 import React from "react";
